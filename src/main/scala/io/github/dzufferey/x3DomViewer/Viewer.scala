@@ -3,7 +3,8 @@ package io.github.dzufferey.x3DomViewer
 import scalatags.Text.all._
 import almond.display.{Html, Text}
 
-class Viewer(uid: Long = scala.util.Random.nextLong(Long.MaxValue)) {
+class Viewer(conf: Config,
+             uid: Long = scala.util.Random.nextLong(Long.MaxValue)) {
     //the uid prevents interferences between multiple viewers in the same notebook
     
     import X3D.{position => xpos, _}
@@ -14,6 +15,7 @@ class Viewer(uid: Long = scala.util.Random.nextLong(Long.MaxValue)) {
     val sidePanelId = "sidePanel" + uid.toString
     val gridAndAxes = "gridAndAxes" + uid.toString
     val gridCheckbox = "gridCheckbox" + uid.toString
+    val gridSize = "gridSize" + uid.toString
     val gridInner = "gridInner" + uid.toString
     val gridBorder = "gridBorder" + uid.toString
   
@@ -53,22 +55,28 @@ class Viewer(uid: Long = scala.util.Random.nextLong(Long.MaxValue)) {
             zIndex := "2",
             backgroundColor := "Black",
             color := "White",
-            transition := "0.5s",
-            height := "15%",
-            width := "0",
+            transition := "0.5s ease-in-out",
+            height := "25%",
+            width := "15%",
             position := "absolute",
-            overflowX := "hidden",
             margin := "10px",
+            css("transform") := "translateX(100%)"
         )(
-            div(margin := "5px")(
-                button(onclick := s"document.getElementById('$sidePanelId').style.width = '0%';")("close")
+            div(margin := "5px", float := "right")(
+                button(onclick := s"document.getElementById('$sidePanelId').style.transform = 'translateX(100%)';",
+                       fontSize := "200%", border := "2px solid Gray", backgroundColor := "Black", color := "White")("×")
             ),
             div(margin := "5px")(
                 input(id := gridCheckbox, tpe := "checkbox", checked := "checked", onchange := toggleVisibility(gridAndAxes)),
-                label( `for` := gridCheckbox)("Grid")
+                label( `for` := gridCheckbox)("Show grid")
             ),
             div(margin := "5px")(
-                button(onclick := togglePerspective)("Perspective")
+                input(width := "50px")(id := gridSize, tpe := "number", value := "10",  min := "0", onchange := updateGrid("this.value", "1")),
+                label( `for` := gridSize)("Grid Size")
+            ),
+            div(margin := "5px")(
+                button(onclick := togglePerspective)("Toggle ortho. persp."),
+                span("(experimental)")
             ),
         )
     }
@@ -124,13 +132,10 @@ class Viewer(uid: Long = scala.util.Random.nextLong(Long.MaxValue)) {
         )
     }
     
-    //TODO orthographic and normal projection, some script to swtich between the two
-    //TODO shortcuts to pick front/back, left/right, top/bottom views
-    //TODO pick initial zoom level according to content bounded box
-    
     def viewer(content: Modifier) = {
-        div(backgroundColor := "rgba(128, 128, 196, 0.4)",
+        div(backgroundColor := conf.backgroundColor,
             borderStyle := "solid",
+            overflowX := "hidden",
             script( tpe := "text/javascript", src := "https://www.x3dom.org/download/x3dom.js" ),
             link( rel := "stylesheet", tpe := "text/css", href := "https://www.x3dom.org/download/x3dom.css" ),
             x3d(id := mainViewer)(
@@ -140,8 +145,8 @@ class Viewer(uid: Long = scala.util.Random.nextLong(Long.MaxValue)) {
                     orthoviewpoint( id:= "viewPointOrtho", xpos := "5.53912 7.69774 6.54642" , orientation := "-0.69862 0.66817 0.25590 1.00294" ),
                     transform(rotation := defaultRotation)(
                         group(id := gridAndAxes)(
-                            grid(10, 1),
-                            axes(100, 1),
+                            grid(conf.gridSize, 1),
+                            axes(conf.axisSize, 1),
                         ),
                         content
                     )
@@ -156,8 +161,7 @@ class Viewer(uid: Long = scala.util.Random.nextLong(Long.MaxValue)) {
                     position := "absolute",
                     top := "5px",
                     right := "25px",
-                    zIndex := "1",
-                    onclick := s"document.getElementById('$sidePanelId').style.width = '15%';")("Options"),
+                    onclick := s"document.getElementById('$sidePanelId').style.transform = 'translateX(0%)';")("Options"),
             sidePanel
         ).render
     }
@@ -171,13 +175,13 @@ class Viewer(uid: Long = scala.util.Random.nextLong(Long.MaxValue)) {
 
 object Viewer {
     
-    def viewer(content: Modifier) = {
-        val v = new Viewer()
+    def viewer(content: Modifier, conf: Config = Config) = {
+        val v = new Viewer(conf)
         v.viewer(content)
     }
     
-    def display(content: Modifier) =  Html(viewer(content))
+    def display(content: Modifier, conf: Config = Config) =  Html(viewer(content, conf))
     
-    def debugDisplay(content: Modifier) =  Text(viewer(content))
+    def debugDisplay(content: Modifier, conf: Config = Config) =  Text(viewer(content, conf))
     
 }

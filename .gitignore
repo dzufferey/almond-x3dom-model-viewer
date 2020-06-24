@@ -1,6 +1,8 @@
 *.class
 *.log
 
+.ipynb_checkpoints/
+
 # sbt specific
 .cache/
 .history/

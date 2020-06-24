@@ -15,7 +15,7 @@ scalacOptions in Compile ++= Seq(
 resolvers += "jitpack" at "https://jitpack.io" // for "com.github.jupyter" % "jvm-repr"
 
 libraryDependencies ++= Seq(
-  "com.lihaoyi" %% "scalatags" % "0.8.2",
+  "com.lihaoyi" %% "scalatags" % "0.9.1",
   "sh.almond" %% "jupyter-api" % "0.10.0"
 )
 

@@ -4,7 +4,7 @@ organization := "io.github.dzufferey"
 
 version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.13.2"
+scalaVersion := "2.13.3"
 
 scalacOptions in Compile ++= Seq(
     "-unchecked",
@@ -16,7 +16,7 @@ resolvers += "jitpack" at "https://jitpack.io" // for "com.github.jupyter" % "jv
 
 libraryDependencies ++= Seq(
   "com.lihaoyi" %% "scalatags" % "0.9.1",
-  "sh.almond" %% "jupyter-api" % "0.10.0"
+  "sh.almond" %% "jupyter-api" % "0.10.3"
 )
 
 publishMavenStyle := true

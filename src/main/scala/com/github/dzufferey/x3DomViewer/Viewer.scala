@@ -1,16 +1,16 @@
-package io.github.dzufferey.x3DomViewer
+package com.github.dzufferey.x3DomViewer
 
 import scalatags.Text.all._
 import almond.display.{Html, Text}
 
 class Viewer(conf: Config,
-             uid: Long = scala.util.Random.nextLong(Long.MaxValue)) {
+             uid: Long = scala.util.Random.nextLong().abs) {
     //the uid prevents interferences between multiple viewers in the same notebook
-    
+
     import X3D.{position => xpos, _}
-    
+
     val defaultRotation = "1 0 0 -1.570796326795" // z axis up
-    
+
     val mainViewer = "mainViewer" + uid.toString
     val sidePanelId = "sidePanel" + uid.toString
     val gridAndAxes = "gridAndAxes" + uid.toString
@@ -18,13 +18,13 @@ class Viewer(conf: Config,
     val gridSize = "gridSize" + uid.toString
     val gridInner = "gridInner" + uid.toString
     val gridBorder = "gridBorder" + uid.toString
-  
+
     def toggleVisibility(id: String) = {
         s"""{var shape = document.getElementById('$id');
             |if (this.checked) shape.setAttribute('render', true);
             |else shape.setAttribute('render', false);}""".stripMargin
     }
-    
+
     def updateGrid(size: String, tick: String) = {
         s"""{var plane = document.getElementById('$gridInner');
             |var s = Math.ceil($size/$tick) * $tick;
@@ -36,7 +36,7 @@ class Viewer(conf: Config,
             |               ( s) + ' ' + ( s) + ' 0.0 , ' +
             |               ( s) + ' ' + (-s) + ' 0.0';}""".stripMargin
     }
-    
+
     //TODO togglePerspective: center of rotation/position does not work and adapt field of view
     def togglePerspective = {
         s"""{var runtime = document.getElementById('$mainViewer').runtime;
@@ -80,8 +80,8 @@ class Viewer(conf: Config,
             ),
         )
     }
-    
-    
+
+
     def grid(_size: Int, step: Int) = {
         val grey = appearance( material( diffuseColor := "0.0 0.0 0.0", specularColor := "0.0 0.0 0.0", emissiveColor := "0.3 0.3 0.3" ) )
         val sSize = s"${2*_size} ${2*_size}"
@@ -100,7 +100,7 @@ class Viewer(conf: Config,
             )
         )
     }
-    
+
     def axes(length: Int, step: Int) = {
         group(
             shape( // X
@@ -131,7 +131,7 @@ class Viewer(conf: Config,
             }
         )
     }
-    
+
     def viewer(content: Modifier) = {
         div(backgroundColor := conf.backgroundColor,
             borderStyle := "solid",
@@ -165,23 +165,23 @@ class Viewer(conf: Config,
             sidePanel
         ).render
     }
-    
+
     //some helpers to create elements
     def display(content: Modifier) =  Html(viewer(content))
-    
+
     def debugDisplay(content: Modifier) =  Text(viewer(content))
-    
+
 }
 
 object Viewer {
-    
+
     def viewer(content: Modifier, conf: Config = Config) = {
         val v = new Viewer(conf)
         v.viewer(content)
     }
-    
+
     def display(content: Modifier, conf: Config = Config) =  Html(viewer(content, conf))
-    
+
     def debugDisplay(content: Modifier, conf: Config = Config) =  Text(viewer(content, conf))
-    
+
 }

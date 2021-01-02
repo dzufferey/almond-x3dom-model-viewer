@@ -1,5 +1,7 @@
 # almond-x3dom-model-viewer
 
+![Version 0.2.0](https://img.shields.io/badge/version-0.2.0-green.svg)
+
 A simple 3D viewer that can be used with [Almond](https://almond.sh/) ([Scala](https://www.scala-lang.org/) [Jupyter notebook](https://jupyter.org/)).
 
 I have a bunch of projects around 3D modeling, printing, and milling for which I like to use Jupyter notebooks.
@@ -17,7 +19,7 @@ The projects for which I made this viewer:
 ## Usage
 
 First, you need to install Jupyter and Almond.
-This project currently uses Scala 2.13.
+This project currently uses Scala 2.13 but should also work with Scala 2.12.
 
 To use it there is two options.
 1. _Local version_ 
@@ -25,17 +27,17 @@ To use it there is two options.
   * run `sbt publishLocal`
   * add the following import in your notebook:
     ```
-    import $ivy.`io.github.dzufferey::almond-x3dom-model-viewer:0.1-SNAPSHOT`
+    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.0`
     ```
 2. _Remote version_
   * add the address of the maven repo for the artifact:
     ```
     import coursierapi._
-    interp.repositories() ++= Seq(MavenRepository.of("https://github.com/dzufferey/my_mvn_repo/raw/master/repository"))
+    interp.repositories() ++= Seq(MavenRepository.of("https://jitpack.io"))
     ```
   * in a following cell you can add the import:
     ```
-    import $ivy.`io.github.dzufferey::almond-x3dom-model-viewer:0.1-SNAPSHOT`
+    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.0`
     ```
 
 Then you can look in the [example notebook](example.ipynb) to learn how to call the viewer.

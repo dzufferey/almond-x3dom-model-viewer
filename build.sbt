@@ -2,13 +2,13 @@ name := "almond-x3dom-model-viewer"
 
 organization := "com.github.dzufferey"
 
-version := "0.2.0"
+version := "0.2.1"
 
-scalaVersion := "2.13.4"
+scalaVersion := "2.13.6"
 
-crossScalaVersions := Seq("2.12.12", "2.13.4")
+crossScalaVersions := Seq("2.12.14", "2.13.6")
 
-scalacOptions in Compile ++= Seq(
+Compile / scalacOptions ++= Seq(
     "-unchecked",
     "-deprecation",
     "-feature"
@@ -17,6 +17,6 @@ scalacOptions in Compile ++= Seq(
 resolvers += "jitpack" at "https://jitpack.io" // for "com.github.jupyter" % "jvm-repr"
 
 libraryDependencies ++= Seq(
-  "com.lihaoyi" %% "scalatags" % "0.9.2",
-  "sh.almond" %% "jupyter-api" % "0.10.9"
+  "com.lihaoyi" %% "scalatags" % "0.9.4",
+  "sh.almond" %% "jupyter-api" % "0.11.2"
 )

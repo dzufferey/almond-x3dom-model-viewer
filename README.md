@@ -1,6 +1,6 @@
 # almond-x3dom-model-viewer
 
-![Version 0.2.0](https://img.shields.io/badge/version-0.2.0-green.svg)
+![Version 0.2.1](https://img.shields.io/badge/version-0.2.1-green.svg)
 
 A simple 3D viewer that can be used with [Almond](https://almond.sh/) ([Scala](https://www.scala-lang.org/) [Jupyter notebook](https://jupyter.org/)).
 

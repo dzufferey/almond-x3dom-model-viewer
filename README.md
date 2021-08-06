@@ -1,6 +1,6 @@
 # almond-x3dom-model-viewer
 
-![Version 0.2.2](https://img.shields.io/badge/version-0.2.2-green.svg)
+![Version 0.2.3](https://img.shields.io/badge/version-0.2.3-green.svg)
 
 A simple 3D viewer that can be used with [Almond](https://almond.sh/) ([Scala](https://www.scala-lang.org/) [Jupyter notebook](https://jupyter.org/)).
 
@@ -13,7 +13,7 @@ I wanted to have a 3D viewer for these projects with the following requirements:
 This is not the best but it is quite simple to use.
 
 The projects for which I made this viewer:
-* [scadla](https://github.com/dzufferey/scadla/): a scala library for constructive solid geometry 
+* [scadla](https://github.com/dzufferey/scadla/): a scala library for constructive solid geometry
 * [libgcode](https://github.com/dzufferey/libgcode): a scala library to create and manipulate [G-code](https://en.wikipedia.org/wiki/G-code)
 
 ## Usage
@@ -27,7 +27,7 @@ To use it there is two options.
   * run `sbt publishLocal`
   * add the following import in your notebook:
     ```
-    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.2`
+    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.3`
     ```
 2. _Remote version_
   * add the address of the maven repo for the artifact:
@@ -37,7 +37,7 @@ To use it there is two options.
     ```
   * in a following cell you can add the import:
     ```
-    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.2`
+    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.3`
     ```
 
 Then you can look in the [example notebook](example.ipynb) to learn how to call the viewer.

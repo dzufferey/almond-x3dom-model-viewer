@@ -1,6 +1,6 @@
 # almond-x3dom-model-viewer
 
-![Version 0.2.1](https://img.shields.io/badge/version-0.2.1-green.svg)
+![Version 0.2.2](https://img.shields.io/badge/version-0.2.2-green.svg)
 
 A simple 3D viewer that can be used with [Almond](https://almond.sh/) ([Scala](https://www.scala-lang.org/) [Jupyter notebook](https://jupyter.org/)).
 
@@ -22,12 +22,12 @@ First, you need to install Jupyter and Almond.
 This project currently uses Scala 2.13 but should also work with Scala 2.12.
 
 To use it there is two options.
-1. _Local version_ 
+1. _Local version_
   * clone this repository
   * run `sbt publishLocal`
   * add the following import in your notebook:
     ```
-    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.0`
+    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.2`
     ```
 2. _Remote version_
   * add the address of the maven repo for the artifact:
@@ -37,13 +37,13 @@ To use it there is two options.
     ```
   * in a following cell you can add the import:
     ```
-    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.0`
+    import $ivy.`com.github.dzufferey::almond-x3dom-model-viewer:0.2.2`
     ```
 
 Then you can look in the [example notebook](example.ipynb) to learn how to call the viewer.
 
 ## ToDo
-    
+
 * orthographic and normal projection
   - navigation/zoom with orthographic projection
   - preserve position when switching between the style of projections

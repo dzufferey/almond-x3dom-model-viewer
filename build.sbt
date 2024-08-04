@@ -2,7 +2,7 @@ name := "almond-x3dom-model-viewer"
 
 organization := "com.github.dzufferey"
 
-version := "0.2.4-snapshot"
+version := "0.2.4-SNAPSHOT"
 
 scalaVersion := "3.3.3"
 

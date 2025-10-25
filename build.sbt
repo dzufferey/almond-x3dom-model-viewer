@@ -4,7 +4,7 @@ organization := "com.github.dzufferey"
 
 version := "0.2.4-SNAPSHOT"
 
-scalaVersion := "3.3.6"
+scalaVersion := "3.3.7"
 
 scalacOptions ++= Seq(
   "-unchecked",
